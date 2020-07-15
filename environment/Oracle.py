@@ -1,13 +1,12 @@
 import cx_Oracle
-
 #this class is designed to log in to Oracle schmea and run the query provided
-class Oracle():
+class Oracle:
 
 	def __init__(self):
 		self.connection = None
 
 	def connect_2_db(self, schema,pw, db):
-		self.connection = cx_oracle.conect(schema + '/' + pw + '@' + db)
+		self.connection = cx_Oracle.connect(schema + '/' + pw + '@' + db)
 		self.cursor = self.connection.cursor()
 
 	def run_query(self, sql_string):

@@ -1,65 +1,74 @@
+from Oracle import Oracle
+import logging
+
+
 class Player:
 	# this is the player class with methods to query the database and return the following
 	# 1. total win amount 2.total wager amount 3. number of wagers
 	# above values can be returned for a member_id for all or specific month and for all or specific game
 
 	def __init__(self, member_id, activity_year_month, game_id):
+		logging.basicConfig(filename='Player.log', filemode='a', format='%(asctime)s - %(message)s',
+							datefmt='%d-%b-%y %H:%M:%S')
 		self.member_id = member_id
 		self.activity_year_month = activity_year_month
 		self.game_id = game_id
-		sql_string_condition = ''
+		self.sql_string_condition = ''
 		if not self.activity_year_month == 'All':
-			sql_string_condition = ' and activity_year_month = {activity_year_month}'
+			self.sql_string_condition = ' and activity_year_month = {activity_year_month}'
 			if not self.game_id == 'All':
-				sql_string_condition = sql_string_condition + ' and game_id = {game_id}'
-		sql_string_condition = sql_string_condition + ' group by member_id'
-		dbquery = oracle()
-		dbquery.connect_2_db('training', 'pw','db')
+				self.sql_string_condition = self.sql_string_condition + ' and game_id = {game_id}'
+		self.sql_string_condition = self.sql_string_condition + ' group by member_id'
+		try:
+			dbquery = Oracle()
+			dbquery.connect_2_db('SCHEMA', 'PW','DB')
+		except:
+			logging.warning('Failed to login to Oracle DB while initiating request for member {member_id}'.format(member_id = self.member_id))
 
 	def tot_win_amount(self):
 		sql_string = """
-		             select sum(win_amount)
-		               from revenue_analysis
-		              where member_id = {member_id}
-		             """
-		sql_string = sql_string + sql_string_condition
+						select sum(win_amount)
+						from revenue_analysis
+						where member_id = {member_id}
+						"""
+		sql_string = sql_string + self.sql_string_condition
 		sql_string.format(member_id=self.member_id,
-			              activity_year_month=self.activity_year_month,
-			              game_id=self.game_id)
+						activity_year_month=self.activity_year_month,
+						game_id=self.game_id)
 		try:
 			win_amount = dbquery.run_query(sql_string)
 		except:
-			logging.warning('Failed to get the total win amount for member {member_id}'.format(member_id = self.member_id))
+			logging.warning('Failed to query the total win amount for member {member_id}'.format(member_id = self.member_id))
 		return win_amount
 
 	def tot_wager_amount(self):
 		sql_string = """
-                     select sum(wager_amount)
-		               from revenue_analysis
-		              where member_id = {member_id}
-		             """
-		sql_string = sql_string + sql_string_condition
+						select sum(wager_amount)
+						from revenue_analysis
+						where member_id = {member_id}
+						"""
+		sql_string = sql_string + self.sql_string_condition
 		sql_string.format(member_id=self.member_id,
-			              activity_year_month=self.activity_year_month,
-			              game_id=self.game_id)
+						activity_year_month=self.activity_year_month,
+						game_id=self.game_id)
 		try:
 			wager_amount = dbquery.run_query(sql_string)
 		except:
-			logging.warning('Failed to get the total wager amount for member {member_id}'.format(member_id = self.member_id))
+			logging.warning('Failed to query the total wager amount for member {member_id}'.format(member_id = self.member_id))
 		return wager_amount
 
 	def num_of_wagers(self):
 		sql_string = """
-                     select count(wager_amount)
-		               from revenue_analysis
-		              where member_id = {member_id}
-		             """
-		sql_string = sql_string + sql_string_condition
+						select count(wager_amount)
+						from revenue_analysis
+						where member_id = {member_id}
+						"""
+		sql_string = sql_string + self.sql_string_condition
 		sql_string.format(member_id=self.member_id,
-			              activity_year_month=self.activity_year_month,
-			              game_id=self.game_id)
+						activity_year_month=self.activity_year_month,
+						game_id=self.game_id)
 		try:
 			tot_num_of_wagers = dbquery.run_query(sql_string)
 		except:
-			logging.warning('Failed to get the total number of wagers for member {member_id}'.format(member_id = self.member_id))
+			logging.warning('Failed to query the total number of wagers for member {member_id}'.format(member_id = self.member_id))
 		return tot_num_of_wagers

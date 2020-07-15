@@ -1,7 +1,7 @@
 from markupsafe import escape
 from flask import Flask, jsonify, request
-import logging
-import Player, Oracle
+from Oracle import Oracle
+from Player import Player
 
 app = Flask(__name__)
 
@@ -14,9 +14,11 @@ app = Flask(__name__)
 def get_tot_win_amount(member_id):
 	activity_year_month = request.args.get('activity_year_month') or 'All'
 	game_id = request.args.get('game_id') or 'All'
-	member = player(member_id, activity_year_month, game_id)
-	logging.basicConfig(filename='tot_win_amount.log', filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-	logging.info(f"Handling request made for Member = {member_id} , for activity_year_months = {activity_year_month}, and game types = {game_id}")
+	logging.info(f"Handling the tot win amount request made for Member = {member_id}  activity_year_months = {activity_year_month} game_types = {game_id}")
+	try:
+		member = Player(member_id, activity_year_month, game_id)
+	except:
+		logging.warning(f"Failed to handle the tot win request made for Member = {member_id} activity_year_months = {activity_year_month} game_types = {game_id}")
 	member_report = {"member_id" : member_id,
 					 "activity_year_month": activity_year_month,
 					 "game_id": game_id,
@@ -25,29 +27,36 @@ def get_tot_win_amount(member_id):
 
 @app.route('/tot_wager_amount/<member_id>')
 def get_tot_wager_amount(member_id):
-    activity_year_month = request.args.get('activity_year_month') or 'All'
-    game_id = request.args.get('game_id') or 'All'
-    logging.basicConfig(filename='tot_wager_amount.log', filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-    logging.info(f"Handling request made for Member = {member_id} , for activity_year_months = {activity_year_month}, and game types = {game_id}")
-    member = player(member_id,activity_year_month,game_id)
-    member_report = {"member_id" : member_id,
+	activity_year_month = request.args.get('activity_year_month')
+	game_id = request.args.get('game_id')
+	logging.info(f"Handling the tot wager amount request made for Member = {member_id}  activity_year_months = {activity_year_month} game_types = {game_id}")
+	try:
+		member = Player(member_id, activity_year_month, game_id)
+	except:
+		logging.warning(f"Failed to handle the tot wager amount request made for Member = {member_id} activity_year_months = {activity_year_month} game_types = {game_id}")
+	member_report = {"member_id" : member_id,
 					 "activity_year_month": activity_year_month,
 					 "game_id": game_id,
 	                "tot_wager_amount" : member.tot_wager_amount()}
-    return jsonify(member_report)
+	return jsonify(member_report)
 
 @app.route('/num_of_wagers/<member_id>')
 def get_num_of_wagers(member_id):
-    activity_year_month = request.args.get('activity_year_month') or 'All'
-    game_id = request.args.get('game_id') or 'All'
-    logging.basicConfig(filename='num_of_wagers.log', filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-    logging.info(f"Handling request made for Member = {member_id} , for activity_year_months = {activity_year_month}, and game types = {game_id}")
-    member = player(member_id,activity_year_month,game_id)
-    member_report = {"member_id" : member_id,
+	activity_year_month = request.args.get('activity_year_month')
+	game_id = request.args.get('game_id')
+	logging.info(f"Handling the tot number of wagers request made for Member = {member_id}  activity_year_months = {activity_year_month} game_types = {game_id}")
+	try:
+		member = Player(member_id, activity_year_month, game_id)
+	except:
+		logging.warning(f"Failed to handling the number of wagers request made for Member = {member_id} activity_year_months = {activity_year_month} game_types = {game_id}")
+	member_report = {"member_id" : member_id,
 					 "activity_year_month": activity_year_month,
 					 "game_id": game_id,
 	                "num_of_wagers" :  member.num_of_wagers()}
-    return jsonify(member_report)
+	return jsonify(member_report)
 
 if __name__ == '__main__':
+
+	import logging
+	logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 	app.run("0.0.0.0", 5000, True)
