@@ -8,7 +8,6 @@ app = Flask(__name__)
 #this app designed to return the total win amount
 #it has two optional variables as activity_year_month and game_id
 #it logs the info in file named tot_win_amount.log
-#
 
 @app.route('/tot_win_amount/<member_id>')
 def get_tot_win_amount(member_id):
@@ -29,11 +28,11 @@ def get_tot_win_amount(member_id):
 def get_tot_wager_amount(member_id):
 	activity_year_month = request.args.get('activity_year_month')
 	game_id = request.args.get('game_id')
-	logging.info(f"Handling the tot wager amount request made for Member = {member_id}  activity_year_months = {activity_year_month} game_types = {game_id}")
+	logging.info(f"Handling the tot wager amount request made for Member = {member_id}  activity_year_months = {activity_year_month} game_id = {game_id}")
 	try:
 		member = Player(member_id, activity_year_month, game_id)
 	except:
-		logging.warning(f"Failed to handle the tot wager amount request made for Member = {member_id} activity_year_months = {activity_year_month} game_types = {game_id}")
+		logging.warning(f"Failed to handle the tot wager amount request made for Member = {member_id} activity_year_months = {activity_year_month} game_id = {game_id}")
 	member_report = {"member_id" : member_id,
 					 "activity_year_month": activity_year_month,
 					 "game_id": game_id,
@@ -44,11 +43,11 @@ def get_tot_wager_amount(member_id):
 def get_num_of_wagers(member_id):
 	activity_year_month = request.args.get('activity_year_month')
 	game_id = request.args.get('game_id')
-	logging.info(f"Handling the tot number of wagers request made for Member = {member_id}  activity_year_months = {activity_year_month} game_types = {game_id}")
+	logging.info(f"Handling the tot number of wagers request made for Member = {member_id}  activity_year_months = {activity_year_month} game_id = {game_id}")
 	try:
 		member = Player(member_id, activity_year_month, game_id)
 	except:
-		logging.warning(f"Failed to handling the number of wagers request made for Member = {member_id} activity_year_months = {activity_year_month} game_types = {game_id}")
+		logging.warning(f"Failed to handling the number of wagers request made for Member = {member_id} activity_year_months = {activity_year_month} game_id = {game_id}")
 	member_report = {"member_id" : member_id,
 					 "activity_year_month": activity_year_month,
 					 "game_id": game_id,
