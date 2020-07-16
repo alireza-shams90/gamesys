@@ -28,8 +28,7 @@ class Player:
             self.dbquery = Oracle()
             self.dbquery.connect_2_db('SCHEMA', 'PW', 'DB')
         except Exception:
-            logging.warning("Failed to login to Oracle DB while initiating request for"
-                            "member {member_id}".format(member_id=self.member_id))
+            logging.warning(f"Failed to query the total win amount for member {self.member_id}")
 
     def tot_win_amount(self):
         sql_string = """
@@ -44,8 +43,7 @@ class Player:
         try:
             win_amount = self.dbquery.run_query(sql_string)
         except Exception:
-            logging.warning("Failed to query the total win amount for"
-                            "member {member_id}".format(member_id=self.member_id))
+            logging.warning(f"Failed to query the total win amount for member {self.member_id}")
         return win_amount
 
     def tot_wager_amount(self):
@@ -78,6 +76,5 @@ class Player:
         try:
             tot_num_of_wagers = self.dbquery.run_query(sql_string)
         except Exception:
-            logging.warning("Failed to query the total number of wagers for"
-                            "member {member_id}".format(member_id=self.member_id))
+            logging.warning(f"Failed to query the total win amount for member {self.member_id}")
         return tot_num_of_wagers
