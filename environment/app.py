@@ -70,6 +70,6 @@ def get_num_of_wagers(member_id):
 if __name__ == '__main__':
 
     import logging
-    logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s'
-                       , datefmt='%d-%b-%y %H:%M:%S')
+    logging.basicConfig(filename='app.log', filemode='a', format='%(asctime)s - %(message)s',
+                        datefmt='%d-%b-%y %H:%M:%S')
     app.run("0.0.0.0", 5000, True)
