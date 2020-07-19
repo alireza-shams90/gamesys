@@ -2,11 +2,11 @@
 
 This app is desinged to response to below RESTful web service requests: 
 
-\* the total win amount for a given **member**,
-\* the total wager amount for a given **member**, and
-\* the number of wagers placed by a given **member**
+* the total win amount for a given **member**,
+* the total wager amount for a given **member**, and
+* the number of wagers placed by a given **member**
 
-** All responses are in *JSON* format.
+ All responses are in *JSON* format.
 
 It can accept two optional parameters 
 1. **specific month** with default value = 'all'
