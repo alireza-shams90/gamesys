@@ -6,13 +6,13 @@ this app designed to return the following requests for a member:
 from markupsafe import escape
 from flask import Flask, jsonify, request
 from Oracle import Oracle
-from Player import Player
+from member_activity import Member
 
 app = Flask(__name__)
 
 
-@app.route('/tot_win_amount/<member_id>')
-def get_tot_win_amount(member_id):
+@app.route('/total_win_amount/<member_id>')
+def get_total_win_amount(member_id):
     activity_year_month = request.args.get('activity_year_month') or 'All'
     game_id = request.args.get('game_id') or 'All'
     logging.info(f"Handling the tot win amount request made for Member = {member_id}" \
@@ -25,12 +25,12 @@ def get_tot_win_amount(member_id):
     member_report = {"member_id": member_id,
                      "activity_year_month": activity_year_month,
                      "game_id": game_id,
-                     "tot_win_amount": member.tot_win_amount()}
+                     "total_win_amount": member.total_win_amount()}
     return jsonify(member_report)
 
 
-@app.route('/tot_wager_amount/<member_id>')
-def get_tot_wager_amount(member_id):
+@app.route('/total_wager_amount/<member_id>')
+def get_total_wager_amount(member_id):
     activity_year_month = request.args.get('activity_year_month')
     game_id = request.args.get('game_id')
     logging.info(f"Handling the tot wager amount request made for Member = {member_id}" \
@@ -44,12 +44,12 @@ def get_tot_wager_amount(member_id):
     member_report = {"member_id": member_id,
                      "activity_year_month": activity_year_month,
                      "game_id": game_id,
-                     "tot_wager_amount": member.tot_wager_amount()}
+                     "total_wager_amount": member.total_wager_amount()}
     return jsonify(member_report)
 
 
-@app.route('/num_of_wagers/<member_id>')
-def get_num_of_wagers(member_id):
+@app.route('/total_number_of_wagers/<member_id>')
+def get_total_number_of_wagers(member_id):
     activity_year_month = request.args.get('activity_year_month')
     game_id = request.args.get('game_id')
     logging.info(f"Handling the tot number of wagers request made for Member = {member_id}" \
@@ -63,7 +63,7 @@ def get_num_of_wagers(member_id):
     member_report = {"member_id": member_id,
                      "activity_year_month": activity_year_month,
                      "game_id": game_id,
-                     "num_of_wagers":  member.num_of_wagers()}
+                     "total_number_of_wagers":  member.total_number_of_wagers()}
     return jsonify(member_report)
 
 

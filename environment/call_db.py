@@ -1,6 +1,6 @@
 import cx_Oracle
 #this class is designed to log in to Oracle schmea and run the query provided
-class Oracle:
+class CallOracle:
 
 	def __init__(self):
 		self.connection = None

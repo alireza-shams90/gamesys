@@ -9,7 +9,7 @@ import logging
 from Oracle import Oracle
 
 
-class Player:
+class Members:
 
     def __init__(self, member_id, activity_year_month, game_id):
         logging.basicConfig(filename="Player.log", filemode='a', format="%(asctime)s - %(message)s"
