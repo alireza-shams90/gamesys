@@ -21,8 +21,8 @@ class Member:
 
         if not self.activity_year_month == 'All':
             self.sql_string_condition = ' and activity_year_month = {activity_year_month}'
-            if not self.game_id == 'All':
-                self.sql_string_condition = self.sql_string_condition + ' and game_id = {game_id}'
+        if not self.game_id == 'All':
+            self.sql_string_condition = self.sql_string_condition + ' and game_id = {game_id}'
         self.sql_string_condition = self.sql_string_condition + ' group by member_id'
         try:
             self.dbquery = Oracle()

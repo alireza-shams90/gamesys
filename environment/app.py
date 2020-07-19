@@ -18,7 +18,7 @@ def get_total_win_amount(member_id):
     logging.info(f"Handling the tot win amount request made for Member = {member_id}" \
                  f"activity_year_months = {activity_year_month} game_types = {game_id}")
     try:
-        member = Player(member_id, activity_year_month, game_id)
+        member = Member(member_id, activity_year_month, game_id)
     except Exception:
         logging.warning(f"Failed to handle the tot win request made for Member = {member_id}" \
                         f"activity_year_months = {activity_year_month} game_types = {game_id}")
@@ -36,7 +36,7 @@ def get_total_wager_amount(member_id):
     logging.info(f"Handling the tot wager amount request made for Member = {member_id}" \
                  f"activity_year_months = {activity_year_month} game_id = {game_id}")
     try:
-        member = Player(member_id, activity_year_month, game_id)
+        member = Member(member_id, activity_year_month, game_id)
     except Exception:
         logging.warning(f"Failed to handle the tot wager amount request made for " \
                         f"Member = {member_id}" \
@@ -55,7 +55,7 @@ def get_total_number_of_wagers(member_id):
     logging.info(f"Handling the tot number of wagers request made for Member = {member_id}" \
                  f"activity_year_months = {activity_year_month} game_id = {game_id}")
     try:
-        member = Player(member_id, activity_year_month, game_id)
+        member = Member(member_id, activity_year_month, game_id)
     except Exception:
         logging.warning(f"Failed to handling the number of wagers request made for " \
                         f"Member = {member_id}" \
