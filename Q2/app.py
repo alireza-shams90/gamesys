@@ -1,11 +1,11 @@
 """
 this app designed to return the following requests for a member:
-1. total win amount 2. total wager amount 3. total number of wager made
+1. total win amount 2. total wager amount 3. total number of wagers made
 """
 
 from markupsafe import escape
 from flask import Flask, jsonify, request
-from call_db import CallOracle
+from db import CallOracle
 from member_activity import Member
 
 app = Flask(__name__)

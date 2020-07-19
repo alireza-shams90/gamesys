@@ -59,5 +59,5 @@ Each method has it's own main sql script which will be concatenated to the
 conditional sql that was created on class initiation. 
 
 # CallOracle class
-This simple class is designed to connect to database, run a query and return the results and get diconnected from the database.
+This simple class is designed to connect to the database, run a query and return the results and get diconnected from the database.
  

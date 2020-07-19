@@ -1,5 +1,5 @@
 import logging
-from call_db import CallOracle
+from db import CallOracle
 
 
 class Member:
@@ -16,7 +16,7 @@ class Member:
         sql_string_condition which will be based on the provided activity_year_month
         and game_id - if all nothing will be added to the script. Finally it creates
         an object of the class CallOracle and log into the Database. Exception logs
-        the failure in connection to DB.
+        the failure in connection to DB. DB details can be added in a configure file.
         :param member_id: Unique identifier for a member
         :param activity_year_month: Specific month e.g. 202007 with default value of 'All'
         :param game_id: Specific game ID e.g. 1234 with default value of all games
