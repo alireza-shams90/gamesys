@@ -1,13 +1,19 @@
-# App:
+# Member activity reporter:
 
-This App is designed to receive the following requests and provide the response:
+This app is desinged to response to below RESTful web service requests: 
 
-1.  total win amount for a member ID 
-2.  total wager amount for a member ID
-3.  total number of wagers for a member ID
+• the total win amount for a given *member*,
+• the total wager amount for a given *member*, and
+• the number of wagers placed by a given *member*
 
-It can accept two optional parameters 1.specific month default=all 2.specific game ID default=all
-The app initiation creates the log file app.log which logs failures on creating a new object of the class Player.
+** All responses are in *JSON* format.
+
+It can accept two optional parameters 
+1. *specific month* with default value = 'all'
+2. *specific game ID* with default value = 'all'
+
+The app initiation creates the log file app.log which logs failures on creating a new object of the class Member.
+
 For each request there will be a specific endpoint that tries to create an object of the
 class Player with the exception of logging the failure into file app.log. Then creates the dict member_report
 and returns jsonified dictionary with the following keys:
@@ -19,7 +25,9 @@ and returns jsonified dictionary with the following keys:
 
 The class Player which gets three variables of 1. member ID 2. month 3 game id. 
 It has the following methods that are querying the database and find:
-1. total win amount 2.total wager amount 3. number of wagers
+1. total win amount 
+2. total wager amount 
+3. number of wagers
 The class initioation creates the log file Player.log based on the passed variables in class
 initiation the condition of the sql query is being created. Then it tries to create an instance of
 the class Oracle and connects the object to database using the class Oracle.
