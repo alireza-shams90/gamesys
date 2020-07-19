@@ -5,7 +5,7 @@ this app designed to return the following requests for a member:
 
 from markupsafe import escape
 from flask import Flask, jsonify, request
-from Oracle import Oracle
+from call_db import CallOracle
 from member_activity import Member
 
 app = Flask(__name__)

@@ -1,5 +1,5 @@
 import logging
-from Oracle import Oracle
+from call_db import CallOracle
 
 
 class Member:
