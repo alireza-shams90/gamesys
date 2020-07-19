@@ -1,8 +1,10 @@
-Application to respond to the following requests:
+# App:
+App is designed to receive the following requests and provide the response:
 
 1. total win amount for a member ID 
 2. total wager amount for a member ID
 3. total number of wagers for a member ID
+
 ** It can accept two optional parameters 1.specific month default=all 2.specific game ID default=all
 The app initiation creates the log file app.log which logs failures on creating a new object of the class Player.
 For each request there will be a specific endpoint that tries to create an object of the
