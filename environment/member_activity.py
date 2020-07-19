@@ -25,12 +25,12 @@ class Member:
             self.sql_string_condition = self.sql_string_condition + ' and game_id = {game_id}'
         self.sql_string_condition = self.sql_string_condition + ' group by member_id'
         try:
-            self.dbquery = Oracle()
+            self.dbquery = CallOracle()
             self.dbquery.connect_2_db('SCHEMA', 'PW', 'DB')
         except Exception:
             logging.warning(f"Failed to query the total win amount for member {self.member_id}")
 
-    def tot_win_amount(self):
+    def total_win_amount(self):
         sql_string = """
                         select sum(win_amount)
                         from revenue_analysis
@@ -46,7 +46,7 @@ class Member:
             logging.warning(f"Failed to query the total win amount for member {self.member_id}")
         return win_amount
 
-    def tot_wager_amount(self):
+    def total_wager_amount(self):
         sql_string = """
                         select sum(wager_amount)
                         from revenue_analysis
@@ -63,7 +63,7 @@ class Member:
                             "member {member_id}".format(member_id=self.member_id))
         return wager_amount
 
-    def num_of_wagers(self):
+    def total_number_of_wagers(self):
         sql_string = """
                         select count(wager_amount)
                         from revenue_analysis
