@@ -53,9 +53,9 @@ class Member:
                         where member_id = {member_id}
                      """
         sql_string = sql_string + self.sql_string_condition
-        sql_string.format(member_id=self.member_id,
-                          activity_year_month=self.activity_year_month,
-                          game_id=self.game_id)
+        sql_string = sql_string.format(member_id=self.member_id,
+                                       activity_year_month=self.activity_year_month,
+                                       game_id=self.game_id)
         try:
             win_amount = self.dbquery.run_query(sql_string)
         except Exception:
@@ -76,9 +76,9 @@ class Member:
                         where member_id = {member_id}
                     """
         sql_string = sql_string + self.sql_string_condition
-        sql_string.format(member_id=self.member_id,
-                          activity_year_month=self.activity_year_month,
-                          game_id=self.game_id)
+        sql_string = sql_string.format(member_id=self.member_id,
+                                       activity_year_month=self.activity_year_month,
+                                       game_id=self.game_id)
         try:
             wager_amount = self.dbquery.run_query(sql_string)
         except Exception:
@@ -100,9 +100,9 @@ class Member:
                         where member_id = {member_id}
                      """
         sql_string = sql_string + self.sql_string_condition
-        sql_string.format(member_id=self.member_id,
-                          activity_year_month=self.activity_year_month,
-                          game_id=self.game_id)
+        sql_string = sql_string.format(member_id=self.member_id,
+                                       activity_year_month=self.activity_year_month,
+                                       game_id=self.game_id)
         try:
             tot_num_of_wagers = self.dbquery.run_query(sql_string)
         except Exception:
