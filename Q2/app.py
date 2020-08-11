@@ -11,7 +11,7 @@ from member_activity import Member
 app = Flask(__name__)
 
 
-@app.route('/total_win_amount/<member_id>')
+@app.route('/total_win_amount/<int:member_id>')
 def get_total_win_amount(member_id):
     activity_year_month = request.args.get('activity_year_month') or 'All'
     game_id = request.args.get('game_id') or 'All'
@@ -29,10 +29,10 @@ def get_total_win_amount(member_id):
     return jsonify(member_report)
 
 
-@app.route('/total_wager_amount/<member_id>')
+@app.route('/total_wager_amount/<int:member_id>')
 def get_total_wager_amount(member_id):
-    activity_year_month = request.args.get('activity_year_month')
-    game_id = request.args.get('game_id')
+    activity_year_month = request.args.get('activity_year_month') or 'All'
+    game_id = request.args.get('game_id') or 'All'
     logging.info(f"Handling the tot wager amount request made for Member = {member_id}" \
                  f"activity_year_months = {activity_year_month} game_id = {game_id}")
     try:
@@ -48,10 +48,10 @@ def get_total_wager_amount(member_id):
     return jsonify(member_report)
 
 
-@app.route('/total_number_of_wagers/<member_id>')
+@app.route('/total_number_of_wagers/<int:member_id>')
 def get_total_number_of_wagers(member_id):
-    activity_year_month = request.args.get('activity_year_month')
-    game_id = request.args.get('game_id')
+    activity_year_month = request.args.get('activity_year_month') or 'All'
+    game_id = request.args.get('game_id') or 'All'
     logging.info(f"Handling the tot number of wagers request made for Member = {member_id}" \
                  f"activity_year_months = {activity_year_month} game_id = {game_id}")
     try:
